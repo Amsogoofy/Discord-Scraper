@@ -1,4 +1,17 @@
+import os
+import re
+import csv
+import time
+from discord import Client, Guild, Member
+from internal.utils import get_account_settings, Logger
 
+client = Client(chunk_guilds_at_startup = False)
+logger = Logger()
+
+
+async def scrape_user_data(conf, guild: Guild):
+    logger.scraper(f"Harvesting user data from '{guild.name}' via message history...")
+    
     users_data = {}
     text_channels = guild.text_channels
     total_channels = len(text_channels)
