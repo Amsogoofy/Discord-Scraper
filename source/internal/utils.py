@@ -19,7 +19,7 @@ header = """[bold white]
 ██║  ██║██║███████╗██║     ██║   ██║██████╔╝██║  ██║    ███████╗██║     ██████╔╝███████║██████╔╝█████╗  ██████╔╝
 ██║  ██║██║╚════██║██║     ██║   ██║██╔══██╗██║  ██║    ╚════██║██║     ██╔══██╗██╔══██║██╔═══╝ ██╔══╝  ██╔══██╗
 ██████╔╝██║███████║╚██████╗╚██████╔╝██║  ██║██████╔╝    ███████║╚██████╗██║  ██║██║   ██║███████╗██║  ██║
-╚═════╝ ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝     ╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝   ╚═╝╚══════╝╚═╝  ╚═╝
+╚═════╝ ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝     ╚══════╝ ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝╚══════╝╚═╝  ╚═╝
 [/]"""
 info = """[bold white]
 [bold cyan]Discord Guild Members Scraper
@@ -42,10 +42,10 @@ def show_header():
 @cache
 def check_config_file():
   if not os.path.isfile("config.json"):
-    json.dump(default_data, open("config.json", "w"), indent=2)
+    json.dump(default_data, open("config.json", "w", encoding="utf-8"), indent=2)
     return
 
-  with open("config.json", "r") as file:
+  with open("config.json", "r", encoding="utf-8") as file:
     file_data = json.loads(file.read())
   
   required_data = {}
@@ -58,7 +58,7 @@ def check_config_file():
     if default_key not in required_data.keys():
       required_data[default_key] = default_value
 
-  json.dump(required_data, open("config.json", "w"), indent=2)
+  json.dump(required_data, open("config.json", "w", encoding="utf-8"), indent=2)
 
 
 class Logger():
@@ -77,9 +77,9 @@ class Logger():
   def custom(self, text: str, header: Optional[str] = None, color: str = "white") -> None:
     print(f"[bold {color}][{header}] {text} [/]")
 
-@cache
+# NO @cache here so it reads fresh updates from disk
 def get_account_settings():
-  return json.load(open("config.json"))
+  return json.load(open("config.json", "r", encoding="utf-8"))
 
 @cache
 def get_safe_guild_name(guild: Guild) -> str:
