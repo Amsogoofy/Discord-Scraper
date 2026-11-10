@@ -1,8 +1,9 @@
 {
-  "token": "YOUR_DISCORD_USER_TOKEN_HERE",
-  "guild_id": 0,
-  "pfp_format": "png",
-  "purge_old_data": true,
-  "download_pfp": true,
-  "channel_id": 0
+    "token": "YOUR_DISCORD_USER_TOKEN_HERE",
+    "guild_id": 0,
+    "pfp_format": "png",
+    "purge_old_data": true,
+    "download_pfp": true,
+    "channel_id": 0,
+    "scrape_mode": "historical"
 }
